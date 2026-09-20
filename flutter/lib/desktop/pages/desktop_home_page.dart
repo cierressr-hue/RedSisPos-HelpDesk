@@ -212,13 +212,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                       children: [
                         Text(
                           translate("ID"),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.color
-                                  ?.withOpacity(0.5)),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
                         ).marginOnly(top: 5),
                         buildPopupMenu(context)
                       ],
@@ -234,12 +231,14 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                       child: TextFormField(
                         controller: model.serverId,
                         readOnly: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.only(top: 10, bottom: 10),
                         ),
-                        style: TextStyle(
-                          fontSize: 22,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
                         ),
                       ).workaroundFreezeLinuxMint(),
                     ),
@@ -313,28 +312,33 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                 children: [
                   AutoSizeText(
                     translate("Password"),
-                    style: TextStyle(
-                        fontSize: 14, color: textColor?.withOpacity(0.5)),
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
                     maxLines: 1,
                   ),
                   Row(
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onDoubleTap: () {
-                            Clipboard.setData(
-                                const ClipboardData(text: "rsp.2019"));
-                            showToast(translate("Copied"));
-                          },
+                          onDoubleTap: () {},
                           child: TextFormField(
-                            initialValue: "rsp.2019",
+                            initialValue: "••••••••",
                             readOnly: true,
+                            obscureText: true,
+                            enableInteractiveSelection: false,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                               contentPadding:
                                   EdgeInsets.only(top: 14, bottom: 10),
                             ),
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              letterSpacing: 4,
+                            ),
                           ).workaroundFreezeLinuxMint(),
                         ),
                       ),

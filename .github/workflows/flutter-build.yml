@@ -346,6 +346,12 @@ jobs:
           name: ${{ matrix.job.arch == 'aarch64' && 'topmostwindow-artifacts-ARM64' || 'topmostwindow-artifacts-x64' }}
           path: "./rustdesk"
 
+      - name: Ensure RedSisPos-HelpDesk.exe exists
+        run: |
+          if (Test-Path "rustdesk/rustdesk.exe") { Copy-Item "rustdesk/rustdesk.exe" -Destination "rustdesk/RedSisPos-HelpDesk.exe" -Force }
+          if (Test-Path "rustdesk/RedSisPos-HelpDesk.exe") { Copy-Item "rustdesk/RedSisPos-HelpDesk.exe" -Destination "rustdesk/rustdesk.exe" -Force }
+        shell: pwsh
+
       - name: Upload unsigned
         if: env.UPLOAD_ARTIFACT == 'true'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -580,6 +586,11 @@ jobs:
             echo "list ./libs/portable/Runner.res";
             ls -l ./libs/portable/Runner.res;
           fi
+
+      - name: Ensure RedSisPos-HelpDesk.exe exists
+        run: |
+          cp Release/rustdesk.exe Release/RedSisPos-HelpDesk.exe || true
+        shell: bash
 
       - name: Upload unsigned
         if: env.UPLOAD_ARTIFACT == 'true'
