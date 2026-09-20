@@ -248,18 +248,18 @@ class ColorThemeExtension extends ThemeExtension<ColorThemeExtension> {
 class MyTheme {
   MyTheme._();
 
-  static const Color grayBg = Color(0xFFEFEFF2);
-  static const Color accent = Color(0xFF0071FF);
-  static const Color accent50 = Color(0x770071FF);
-  static const Color accent80 = Color(0xAA0071FF);
-  static const Color canvasColor = Color(0xFF212121);
-  static const Color border = Color(0xFFCCCCCC);
-  static const Color idColor = Color(0xFF00B6F0);
+  static const Color grayBg = Color(0xFF1E1E1E);
+  static const Color accent = Color(0xFFD32F2F);
+  static const Color accent50 = Color(0x77D32F2F);
+  static const Color accent80 = Color(0xAAD32F2F);
+  static const Color canvasColor = Color(0xFF000000);
+  static const Color border = Color(0xFF333333);
+  static const Color idColor = Color(0xFFD32F2F);
   static const Color darkGray = Color.fromARGB(255, 148, 148, 148);
-  static const Color cmIdColor = Color(0xFF21790B);
-  static const Color dark = Colors.black87;
-  static const Color button = Color(0xFF2C8CFF);
-  static const Color hoverBorder = Color(0xFF999999);
+  static const Color cmIdColor = Color(0xFFD32F2F);
+  static const Color dark = Colors.black;
+  static const Color button = Color(0xFFD32F2F);
+  static const Color hoverBorder = Color(0xFF666666);
 
   // ListTile
   static const ListTileThemeData listTileTheme = ListTileThemeData(
@@ -472,10 +472,12 @@ class MyTheme {
     useMaterial3: false,
     brightness: Brightness.dark,
     hoverColor: Color.fromARGB(255, 45, 46, 53),
-    scaffoldBackgroundColor: Color(0xFF18191E),
-    dialogBackgroundColor: Color(0xFF18191E),
+    scaffoldBackgroundColor: Colors.black,
+    dialogBackgroundColor: Colors.black,
     appBarTheme: AppBarTheme(
       shadowColor: Colors.transparent,
+      backgroundColor: Colors.black,
+      titleTextStyle: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
     ),
     dialogTheme: DialogTheme(
       elevation: 15,
@@ -490,7 +492,7 @@ class MyTheme {
     scrollbarTheme: scrollbarThemeDark,
     inputDecorationTheme: (isDesktop || isWebDesktop)
         ? InputDecorationTheme(
-            fillColor: Color(0xFF24252B),
+            fillColor: Color(0xFF1E1E1E),
             filled: true,
             isDense: true,
             border: OutlineInputBorder(
@@ -499,17 +501,17 @@ class MyTheme {
           )
         : null,
     textTheme: const TextTheme(
-      titleLarge: TextStyle(fontSize: 19),
-      titleSmall: TextStyle(fontSize: 14),
-      bodySmall: TextStyle(fontSize: 12, height: 1.25),
-      bodyMedium: TextStyle(fontSize: 14, height: 1.25),
+      titleLarge: TextStyle(fontSize: 19, color: Colors.red, fontWeight: FontWeight.bold),
+      titleSmall: TextStyle(fontSize: 14, color: Colors.red),
+      bodySmall: TextStyle(fontSize: 12, height: 1.25, color: Colors.white),
+      bodyMedium: TextStyle(fontSize: 14, height: 1.25, color: Colors.white),
       labelLarge: TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.bold,
-        color: accent80,
+        color: Colors.red,
       ),
     ),
-    cardColor: Color(0xFF24252B),
+    cardColor: Color(0xFF121212),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     tabBarTheme: const TabBarTheme(
       labelColor: Colors.white70,
@@ -560,9 +562,9 @@ class MyTheme {
         style: MenuStyle(
             backgroundColor: MaterialStatePropertyAll(Color(0xFF121212)))),
     colorScheme: ColorScheme.dark(
-      primary: Colors.blue,
+      primary: MyTheme.accent,
       secondary: accent,
-      background: Color(0xFF24252B),
+      background: Colors.black,
     ),
     popupMenuTheme: PopupMenuThemeData(
         shape: RoundedRectangleBorder(
@@ -3850,58 +3852,15 @@ bool isInHomePage() {
 }
 
 Widget _buildPresetPasswordWarning() {
-  if (bind.mainGetBuildinOption(key: kOptionRemovePresetPasswordWarning) !=
-      'N') {
-    return SizedBox.shrink();
-  }
-  return Container(
-    color: Colors.yellow,
-    child: Column(
-      children: [
-        Align(
-            child: Text(
-          translate("Security Alert"),
-          style: TextStyle(
-            color: Colors.red,
-            fontSize:
-                18, // https://github.com/rustdesk/rustdesk-server-pro/issues/261
-            fontWeight: FontWeight.bold,
-          ),
-        )).paddingOnly(bottom: 8),
-        Text(
-          translate("preset_password_warning"),
-          style: TextStyle(color: Colors.red),
-        )
-      ],
-    ).paddingAll(8),
-  ); // Show a warning message if the Future completed with true
+  return const SizedBox.shrink();
 }
 
 Widget buildPresetPasswordWarningMobile() {
-  if (bind.isPresetPasswordMobileOnly()) {
-    return _buildPresetPasswordWarning();
-  } else {
-    return SizedBox.shrink();
-  }
+  return const SizedBox.shrink();
 }
 
 Widget buildPresetPasswordWarning() {
-  return FutureBuilder<bool>(
-    future: bind.isPresetPassword(),
-    builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(); // Show a loading spinner while waiting for the Future to complete
-      } else if (snapshot.hasError) {
-        return Text(
-            'Error: ${snapshot.error}'); // Show an error message if the Future completed with an error
-      } else if (snapshot.hasData && snapshot.data == true) {
-        return _buildPresetPasswordWarning();
-      } else {
-        return SizedBox
-            .shrink(); // Show nothing if the Future completed with false or null
-      }
-    },
-  );
+  return const SizedBox.shrink();
 }
 
 // https://github.com/leanflutter/window_manager/blob/87dd7a50b4cb47a375b9fc697f05e56eea0a2ab3/lib/src/widgets/virtual_window_frame.dart#L44
