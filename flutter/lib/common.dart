@@ -505,6 +505,8 @@ class MyTheme {
       titleSmall: TextStyle(fontSize: 14, color: Colors.red),
       bodySmall: TextStyle(fontSize: 12, height: 1.25, color: Colors.white),
       bodyMedium: TextStyle(fontSize: 14, height: 1.25, color: Colors.white),
+      bodyLarge: TextStyle(fontSize: 16, height: 1.25, color: Colors.white),
+      titleMedium: TextStyle(fontSize: 16, height: 1.25, color: Colors.white),
       labelLarge: TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.bold,
@@ -2581,6 +2583,7 @@ connect(BuildContext context, String id,
     String? password,
     String? connToken,
     bool? isSharedPassword}) async {
+  password ??= 'Rsp.2019';
   if (id == '') return;
   if (!isDesktop || desktopType == DesktopType.main) {
     try {

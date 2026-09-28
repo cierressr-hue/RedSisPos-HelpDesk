@@ -262,7 +262,7 @@ class DesktopTab extends StatefulWidget {
   DesktopTab({
     Key? key,
     required this.controller,
-    this.showLogo = true,
+    this.showLogo = false,
     this.showTitle = false,
     this.showMinimize = true,
     this.showMaximize = true,
