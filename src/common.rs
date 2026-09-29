@@ -128,6 +128,7 @@ pub fn global_init() -> bool {
             crate::server::wayland::init();
         }
     }
+    *hbb_common::config::PROD_RENDEZVOUS_SERVER.write().unwrap() = "redsispos.com".to_owned();
     true
 }
 
@@ -1954,7 +1955,7 @@ pub async fn get_key(sync: bool) -> String {
         options.remove("key").unwrap_or_default()
     };
     if key.is_empty() {
-        key = config::RS_PUB_KEY.to_owned();
+        key = "".to_owned();
     }
     key
 }
